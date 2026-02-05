@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Artikel Saya</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<style>
+body{
+  font-family:Arial;
+  background:#0f172a;
+  color:white;
+  padding:20px;
+}
+
+.card{
+  background:#1f2937;
+  padding:20px;
+  border-radius:15px;
+  margin-top:15px;
+}
+
+.card:hover{
+  background:#374151;
+}
+
+.judul{
+  font-size:20px;
+  font-weight:bold;
+}
+
+#artikelPage{
+  display:none;
+}
+</style>
+</head>
+
+<body>
+
+<h1>📚 Artikel Terbaru</h1>
+<div id="homePage"></div>
+
+<div id="artikelPage">
+<button onclick="kembali()">⬅ Kembali</button>
+<h2 id="judulArtikel"></h2>
+<p id="isiArtikel"></p>
+</div>
+
+<script>
+let tg = window.Telegram.WebApp;
+tg.expand();
+
+const artikel = [
+  {
+    judul:"Cara Menghasilkan Uang dari Telegram",
+    isi:"Telegram bisa digunakan untuk jualan, affiliate, dan membership premium..."
+  },
+  {
+    judul:"Tips Jualan Online untuk Pemula",
+    isi:"Mulai dari membuat produk, promosi di sosial media, hingga membangun brand..."
+  },
+  {
+    judul:"Cara Bangun Komunitas Digital",
+    isi:"Komunitas adalah aset terbesar dalam bisnis online..."
+  }
+];
+
+let home = document.getElementById("homePage");
+
+artikel.forEach((data,i)=>{
+  home.innerHTML += `
+    <div class="card" onclick="bukaArtikel(${i})">
+      <div class="judul">${data.judul}</div>
+      <p>Klik untuk membaca...</p>
+    </div>
+  `;
+});
+
+function bukaArtikel(i){
+  document.getElementById("homePage").style.display="none";
+  document.getElementById("artikelPage").style.display="block";
+
+  document.getElementById("judulArtikel").innerHTML = artikel[i].judul;
+  document.getElementById("isiArtikel").innerHTML = artikel[i].isi;
+}
+
+function kembali(){
+  document.getElementById("homePage").style.display="block";
+  document.getElementById("artikelPage").style.display="none";
+}
+</script>
+
+</body>
+</html>
